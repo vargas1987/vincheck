@@ -3,19 +3,24 @@ parameters:
     # This allows you to run cache:warmup even if your
     # environment variables are not available yet.
     # You should not need to change this value.
-    env(DATABASE_URL): 'psql://postgres:1111@127.0.0.1:5432/vincheck'
+    env(DATABASE_URL): ''
 
 doctrine:
     dbal:
-        # configure these for your database server
-        driver: 'pdo_pgsql'
-        server_version: '10.6'
-        charset: utf8mb4
-        default_table_options:
-            charset: utf8mb4
-            collate: utf8mb4_unicode_ci
-
-        url: '%env(resolve:DATABASE_URL)%'
+        default_connection: default
+        connections:
+            default:
+                server_version: '10.6'
+                driver:  pdo_pgsql
+                dbname:  vincheck
+                host:    127.0.0.1
+                port:    5432
+                user:    postgres
+                password: 1111
+                charset:  utf8
+                mapping_types:
+                    json: array
+                    jsonb: array
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
