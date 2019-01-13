@@ -56,7 +56,9 @@ class AvitoLocationParserCommand extends Command
             $location->setLevel(1);
             /** @var \SimpleXMLElement $attribute */
             foreach ($child->attributes() as $attribute) {
-                dump($attribute);exit;
+                dump($attribute);
+//                $attribute =json_decode(json_encode($attribute), true);
+//                $location->setCoordinates(explode(' ', $attribute[0]));
             }
         }
 
