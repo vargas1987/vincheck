@@ -22,6 +22,11 @@ class Location
     private $id;
 
     /**
+     * @ORM\Column(name="external_id", type="integer", nullable=false)
+     */
+    private $externalId;
+
+    /**
      * @ORM\Column(name="name", type="text", nullable=false)
      */
     private $name;
@@ -93,6 +98,25 @@ class Location
     }
 
     /**
+     * @return int
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * @param int $externalId
+     * @return $this
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -131,7 +155,7 @@ class Location
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getLevel()
     {
@@ -139,7 +163,7 @@ class Location
     }
 
     /**
-     * @param string $level
+     * @param int $level
      * @return $this
      */
     public function setLevel($level)
