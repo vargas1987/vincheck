@@ -38,25 +38,22 @@ class AvitoLocationParserCommand extends AbstractCommand
         $xml = simplexml_load_file(self::AVITO_LOCATIONS_URL);
         /** @var \SimpleXMLElement $child */
         foreach ($xml->children() as $child) {
-            dump($child);exit;
+            $item = json_decode(json_encode($child->attributes()), true);
+            $attributes = $item['@attributes'];
+
+            $isExists = $this->getEm()->getRepository(Location::class)
+                ->findOneBy(['externalId'=> $attributes[self::ATTRIBUTE_ID]]);
+
+            if ($isExists) {
+                continue;
+            }
+
             $location = new Location();
             $location->setType($child->getName());
             $location->setLevel(1);
-            /** @var \SimpleXMLElement $attribute */
-            foreach ($child->attributes() as $attribute) {
-                $item =json_decode(json_encode($attribute), true);
-                switch ($attribute->getName()) {
-                    case self::ATTRIBUTE_ID:
-                        $location->setExternalId($item[0]);
-                        break;
-                    case self::ATTRIBUTE_NAME:
-                        $location->setName($item[0]);
-                        break;
-                    case self::ATTRIBUTE_COORD:
-                        $location->setCoordinates(explode(' ', $item[0]));
-                        break;
-                }
-            }
+            $location->setExternalId($attributes[self::ATTRIBUTE_ID]);
+            $location->setCoordinates(explode(' ', $attributes[self::ATTRIBUTE_COORD]));
+            $location->setName($attributes[self::ATTRIBUTE_NAME]);
             $this->getEm()->persist($location);
         }
 
