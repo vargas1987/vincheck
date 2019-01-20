@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Location
 {
+    const TYPE_REGION = 'Region';
+    const TYPE_DIRECTION_ROAD = 'DirectionRoad';
+    const TYPE_SUBWAY = 'Subway';
+    const TYPE_CITY = 'City';
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
