@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-migrations-bundle": "^1.3",
+        "moriony/rpc-client": "^0.0.2",
         "php-http/guzzle6-adapter": "^2.0",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "4.2.*",
@@ -13,9 +14,11 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/orm-pack": "^1.0",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "4.2.*",
+        "vargas/rpc-server": "^1.0"
     },
     "config": {
+        "bin-dir": "bin",
         "preferred-install": {
             "*": "dist"
         },
@@ -56,6 +59,9 @@
     },
     "extra": {
         "symfony": {
+            "symfony-bin-dir": "bin",
+            "symfony-var-dir": "var",
+            "symfony-web-dir": "web",
             "allow-contrib": false,
             "require": "4.2.*"
         }
